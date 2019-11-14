@@ -79,14 +79,13 @@ int main() {
 		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
 		std::cout << "ERROR::SHADER::PROGRAM::COMPILATION_FAILED\n" << infoLog << std::endl;
 	}
-	glUseProgram(shaderProgram);
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 
 	float vertices[] = {
-		-0.5f,-0.5f,0.0f,
-		 0.5f,-0.5f,0.0f,
-		 0.0f, 0.5f,0.0f
+		-0.5f,-0.5f, 0.0f,
+		 0.5f,-0.5f, 0.0f,
+		 0.0f, 0.5f ,0.0f,
 	};
 	unsigned int VBO;
 	glGenBuffers(1, &VBO);
