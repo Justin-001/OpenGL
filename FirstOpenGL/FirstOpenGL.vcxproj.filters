@@ -18,7 +18,7 @@
     <ClCompile Include="..\..\glad\src\glad.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Triangle.cpp">
+    <ClCompile Include="GLSL.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
