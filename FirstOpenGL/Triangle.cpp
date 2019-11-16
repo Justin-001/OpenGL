@@ -162,7 +162,6 @@ int main() {
 
 	glDeleteVertexArrays(2, VAOs);
 	glDeleteBuffers(2, VBOs);
-
 	glfwTerminate();
 	return 0;
 }
