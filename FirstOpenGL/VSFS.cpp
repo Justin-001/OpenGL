@@ -1,5 +1,4 @@
-#include<shader_s.h>
-
+#include "Includes/shader.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -31,9 +30,10 @@ int main() {
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return -1;
 	}
-
-	Shader oursha
 	
+	Shader ourShader("vertexShader.vert", "fragmentShader.frag");
+
+
 	float vertices[] = {
 		//position           //color
 		-0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,// left 
@@ -63,14 +63,7 @@ int main() {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glUseProgram(shaderProgram);
-
-		float timeValue = glfwGetTime();
-		float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
-		int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
-		
-		glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
-
+		ourShader.use();
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 

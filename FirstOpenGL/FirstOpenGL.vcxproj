@@ -111,6 +111,9 @@
     <IncludePath>D:\Documents\CG\OpenGL\Includes;$(IncludePath)</IncludePath>
     <LibraryPath>D:\Documents\CG\OpenGL\Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>D:\Documents\CG\FirstOpenGL\FirstOpenGL\Includes;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -194,11 +197,11 @@
     <ClCompile Include="VSFS.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="shader_s.h" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="fragmentShader.frag" />
     <Text Include="vertexShader.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Includes\shader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
