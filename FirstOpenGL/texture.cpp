@@ -12,6 +12,7 @@ const unsigned int SCR_HEIGHT = 600;
 
 void processInput(GLFWwindow* window);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void mixValue_callback(GLFWwindow* window, float* mixValue);
 
 int main() {
 	glfwInit();
@@ -39,10 +40,10 @@ int main() {
 
 	float vertices[] = {
 		//position           //color            //texture
-		 0.5f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  2.0f, 2.0f, // 右上
-		 0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  2.0f, 0.0f, // 右下
+		 0.5f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  1.0f, 1.0f, // 右上
+		 0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  1.0f, 0.0f, // 右下
 		-0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 1.0f,  0.0f, 0.0f, // 左下
-		-0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f,  0.0f, 2.0f  // 左上
+		-0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f,  0.0f, 1.0f  // 左上
 	};
 
 	unsigned int indices[] = {
@@ -113,6 +114,8 @@ int main() {
 	// load shader
 	ourShader.use();
 	ourShader.setInt("texture2", 1);
+	float mixValue = 0.2f;
+
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -124,11 +127,14 @@ int main() {
 		glBindTexture(GL_TEXTURE_2D, texture1);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
-		
+
 		ourShader.use();
 //		ourShader.setFloat("hoffset", 0.5f);
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+		mixValue_callback(window, &mixValue);
+		ourShader.setFloat("mixValue", mixValue);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -153,4 +159,11 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	// make sure the viewport matches the new window dimensions; note that width and 
 	// height will be significantly larger than specified on retina displays.
 	glViewport(0, 0, width, height);
+}
+
+void mixValue_callback(GLFWwindow* window,float* mixValue) {
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+		*mixValue += 0.01f;
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		*mixValue -= 0.01f;
 }
