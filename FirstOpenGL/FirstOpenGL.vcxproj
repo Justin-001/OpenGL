@@ -194,7 +194,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\glad\src\glad.c" />
-    <ClCompile Include="VSFS.cpp" />
+    <ClCompile Include="texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="fragmentShader.frag" />
@@ -203,6 +203,9 @@
   <ItemGroup>
     <ClInclude Include="Includes\shader.h" />
     <ClInclude Include="Includes\stb_image.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="container.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

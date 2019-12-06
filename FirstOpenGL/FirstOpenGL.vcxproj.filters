@@ -18,7 +18,7 @@
     <ClCompile Include="..\..\glad\src\glad.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="VSFS.cpp">
+    <ClCompile Include="texture.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -37,5 +37,10 @@
     <ClInclude Include="Includes\stb_image.h">
       <Filter>头文件</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="container.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
 </Project>
