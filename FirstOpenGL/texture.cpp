@@ -1,6 +1,9 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "Includes/shader.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -14,6 +17,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mixValue_callback(GLFWwindow* window, float* mixValue);
 
 int main() {
+
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -26,6 +30,7 @@ int main() {
 		glfwTerminate();
 		return -1;
 	}
+
 	glfwMakeContextCurrent(window);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
@@ -115,7 +120,6 @@ int main() {
 	ourShader.setInt("texture2", 1);
 	float mixValue = 0.2f;
 
-
 	while (!glfwWindowShouldClose(window))
 	{
 		processInput(window);
@@ -126,6 +130,13 @@ int main() {
 		glBindTexture(GL_TEXTURE_2D, texture1);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
+
+		glm::mat4 trans = glm::mat4(1.0f); //矩阵初始化为单位矩阵
+		trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
+		
+		unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform");
+		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 
 		ourShader.use();
 //		ourShader.setFloat("hoffset", 0.5f);
