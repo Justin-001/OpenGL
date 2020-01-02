@@ -194,7 +194,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\glad\src\glad.c" />
-    <ClCompile Include="texture.cpp" />
+    <ClCompile Include="coordinate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="fragmentShader.frag" />
