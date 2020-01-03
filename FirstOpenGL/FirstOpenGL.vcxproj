@@ -96,8 +96,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\Documents\CG\OpenGL\Includes;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Documents\CG\OpenGL\Libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Projects\CG-Dependencies\OpenGL\Includes;D:\Documents\CG\OpenGL\Includes;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Projects\CG-Dependencies\OpenGL\Libs;D:\Documents\CG\OpenGL\Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='OpenGL|Win32'">
     <IncludePath>D:\Documents\CG\OpenGL\Includes;$(IncludePath)</IncludePath>
@@ -193,8 +193,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\glad\src\glad.c" />
     <ClCompile Include="coordinate.cpp" />
+    <ClCompile Include="glad.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="fragmentShader.frag" />
