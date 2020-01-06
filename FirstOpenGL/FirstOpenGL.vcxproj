@@ -193,7 +193,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="coordinate.cpp" />
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="glad.c" />
   </ItemGroup>
   <ItemGroup>
