@@ -22,9 +22,12 @@ float lastX = SCR_WIDTH / 2.0;
 float lastY = SCR_HEIGHT / 2.0;
 float fov = 45.0;
 
+
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
+glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
 void processInput(GLFWwindow* window);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -56,7 +59,8 @@ int main() {
 		return -1;
 	}
 
-	Shader lightingShader("vertexShader.vert", "fragmentShader.frag");
+	Shader lightingShader("object.vert", "object.frag");
+	Shader lampShader("lamp.vert", "lamp.frag");
 
 	float vertices[] = {
 	-0.5f, -0.5f, -0.5f,   
@@ -119,9 +123,6 @@ int main() {
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-	// load shader
-	lightingShader.use();
-
 	while (!glfwWindowShouldClose(window))
 	{
 		processInput(window);
@@ -132,19 +133,13 @@ int main() {
 		lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
 		lightingShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
 
-		glBindVertexArray(cubeVAO);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-
-		glBindVertexArray(lightVAO);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glm::mat4 model = glm::mat4(1.0f);
+		lightingShader.setMat4("model", model);
 
 		float currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 		processInput(window);
-
-		glm::mat4 model = glm::mat4(1.0f);
-		lightingShader.setMat4("model", model);
 
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		glfwSetCursorPosCallback(window, mouse_callback);
@@ -156,6 +151,34 @@ int main() {
 		glfwSetScrollCallback(window, scroll_callback);
 		projection = glm::perspective(glm::radians(fov), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		lightingShader.setMat4("projection", projection);
+
+		glBindVertexArray(cubeVAO);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		lampShader.use();
+
+		glm::mat4 lampmodel = glm::translate(lampmodel, lightPos); //move the lamp to another location
+		lampmodel = glm::scale(lampmodel, glm::vec3(0.2f));
+		lampShader.setMat4("lampmodel", lampmodel);
+
+		currentFrame = glfwGetTime();
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+		processInput(window);
+
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		glfwSetCursorPosCallback(window, mouse_callback);
+		view = glm::mat4(1.0f); //矩阵初始化为单位矩阵
+		view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+		lampShader.setMat4("view", view);
+
+		projection = glm::mat4(1.0f);
+		glfwSetScrollCallback(window, scroll_callback);
+		projection = glm::perspective(glm::radians(fov), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+		lampShader.setMat4("projection", projection);
+
+		glBindVertexArray(lightVAO);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -212,7 +235,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
 	lastX = xpos;
 	lastY = ypos;
 
-	float sensitivity = 0.05;
+	float sensitivity = 0.05f;
 	xoffset *= sensitivity;
 	yoffset *= sensitivity;
 

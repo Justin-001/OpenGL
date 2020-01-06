@@ -197,8 +197,8 @@
     <ClCompile Include="glad.c" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="fragmentShader.frag" />
-    <Text Include="vertexShader.vert" />
+    <Text Include="object.frag" />
+    <Text Include="object.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Includes\shader.h" />
@@ -207,6 +207,10 @@
   <ItemGroup>
     <Image Include="awesomeface.png" />
     <Image Include="container.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lamp.frag" />
+    <None Include="lamp.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

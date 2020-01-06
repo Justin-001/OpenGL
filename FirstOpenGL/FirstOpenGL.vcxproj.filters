@@ -23,10 +23,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="vertexShader.vert">
+    <Text Include="object.frag">
       <Filter>资源文件</Filter>
     </Text>
-    <Text Include="fragmentShader.frag">
+    <Text Include="object.vert">
       <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>
@@ -45,5 +45,13 @@
     <Image Include="awesomeface.png">
       <Filter>资源文件</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lamp.frag">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="lamp.vert">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
