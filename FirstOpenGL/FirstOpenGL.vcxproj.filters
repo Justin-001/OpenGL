@@ -34,7 +34,7 @@
     <ClInclude Include="Includes\shader.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Includes\stb_image.h">
+    <ClInclude Include="Includes\camera.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

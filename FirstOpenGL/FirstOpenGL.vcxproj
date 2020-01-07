@@ -201,8 +201,8 @@
     <Text Include="object.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Includes\camera.h" />
     <ClInclude Include="Includes\shader.h" />
-    <ClInclude Include="Includes\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="awesomeface.png" />
