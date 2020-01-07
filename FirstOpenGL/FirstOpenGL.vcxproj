@@ -193,7 +193,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="colors.cpp" />
+    <ClCompile Include="lighting.cpp" />
     <ClCompile Include="glad.c" />
   </ItemGroup>
   <ItemGroup>
