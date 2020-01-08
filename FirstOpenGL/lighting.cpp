@@ -131,8 +131,8 @@ int main() {
 	unsigned int diffuseMap = loadTexture("container2.png");
 
 	// specular texture
-	lightingShader.setInt("material.specular", 1);
-	unsigned int specularMap = loadTexture("container2_specular.png");
+/*	lightingShader.setInt("material.specular", 1);
+	unsigned int specularMap = loadTexture("container2_specular.png");*/
 
 	while (!glfwWindowShouldClose(window)){
 
@@ -157,8 +157,8 @@ int main() {
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, diffuseMap);
 
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, specularMap);
+/*		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, specularMap);*/
 
 		glm::vec3 lightColor = glm::vec3(1.0f);
 
