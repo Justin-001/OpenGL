@@ -173,7 +173,7 @@ int main() {
 		lightingShader.setVec3("light.diffuse", glm::vec3(0.5f));
 		lightingShader.setVec3("light.specular", glm::vec3(1.0f));
 
-		lightingShader.setVec3("lightPos", lightPos);
+		lightingShader.setVec3("light.position", lightPos);
 		lightingShader.setVec3("viewPos", camera.Position);
 
 		glm::mat4 model = glm::mat4(1.0f);
