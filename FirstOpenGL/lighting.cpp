@@ -126,7 +126,7 @@ int main() {
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-
+	lightingShader.use();
 	// diffuse texture
 	lightingShader.setInt("material.diffuse", 0);
 	unsigned int diffuseMap = loadTexture("container2.png");
@@ -152,7 +152,6 @@ int main() {
 		glm::vec3 lightPos = glm::vec3(1.2f, 1.0f, 2.0f);
 
 		lightingShader.use();
-		lightingShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
 		lightingShader.setFloat("material.shininess", 64.0f);
 
 		glActiveTexture(GL_TEXTURE0);
