@@ -165,7 +165,8 @@ int main() {
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glm::vec3 lightDirection = glm::vec3(-0.2f, -1.0f, -0.3f);
+//		glm::vec3 lightDirection = glm::vec3(-0.2f, -1.0f, -0.3f);
+		glm::vec3 lightPosition = glm::vec3(0.2f, 1.0f, 2.0f);
 
 		lightingShader.use();
 		lightingShader.setFloat("material.shininess", 32.0f);
@@ -180,7 +181,11 @@ int main() {
 		lightingShader.setVec3("light.diffuse", glm::vec3(0.5f));
 		lightingShader.setVec3("light.specular", glm::vec3(1.0f));
 
-		lightingShader.setVec3("light.direction", lightDirection);
+		lightingShader.setFloat("light.constant", 1.0f);
+		lightingShader.setFloat("light.linear", 0.09f);
+		lightingShader.setFloat("light.quadratic", 0.032f);
+
+		lightingShader.setVec3("light.position", lightPosition);
 		lightingShader.setVec3("viewPos", camera.Position);
 
 		glm::mat4 model = glm::mat4(1.0f);
@@ -208,7 +213,7 @@ int main() {
 
 		processInput(window);
 
-/*		lampShader.use();
+		lampShader.use();
 
 		lampShader.setVec3("lightColor", glm::vec3(1.0f));
 
@@ -221,7 +226,7 @@ int main() {
 
 		glBindVertexArray(lightVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-*/
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
@@ -239,7 +244,7 @@ void processInput(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 
-	float cameraSpeed = 2.5 * deltaTime;
+	float cameraSpeed = 2.5f * deltaTime;
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		camera.ProcessKeyboard(Camera_Movement::FORWARD, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
