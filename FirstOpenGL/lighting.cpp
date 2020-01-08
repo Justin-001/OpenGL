@@ -188,7 +188,7 @@ int main() {
 		lightingShader.setVec3("light.position", camera.Position);
 		lightingShader.setVec3("light.direction", camera.Front);
 		lightingShader.setFloat("light.cutOff", glm::cos(glm::radians(12.5f))); //用余弦值而不用角度值，无需计算反余弦，节省性能开销
-
+		lightingShader.setFloat("light.outerCutOff", glm::cos(glm::radians(17.5f)));
 
 		lightingShader.setVec3("viewPos", camera.Position);
 
