@@ -131,6 +131,7 @@ int main() {
 	unsigned int diffuseMap = loadTexture("container2.png");
 
 	// specular texture
+	lightingShader.setInt("material.specular", 1);
 	unsigned int specularMap = loadTexture("container2_specular.png");
 
 	while (!glfwWindowShouldClose(window)){
@@ -161,8 +162,8 @@ int main() {
 
 		glm::vec3 lightColor = glm::vec3(1.0f);
 
-		lightingShader.setVec3("light.ambient", glm::vec3(0.5f));
-		lightingShader.setVec3("light.diffuse", glm::vec3(0.2f));
+		lightingShader.setVec3("light.ambient", glm::vec3(0.2f));
+		lightingShader.setVec3("light.diffuse", glm::vec3(0.5f));
 		lightingShader.setVec3("light.specular", glm::vec3(1.0f));
 
 		lightingShader.setVec3("lightPos", lightPos);
@@ -263,10 +264,7 @@ unsigned int loadTexture(char const* path) {
 
 	int width, height, nrComponents;
 	stbi_set_flip_vertically_on_load(true);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 	unsigned char* data = stbi_load(path, &width, &height, &nrComponents, 0);
 	if (data) {
 		GLenum format;
@@ -278,8 +276,13 @@ unsigned int loadTexture(char const* path) {
 			format = GL_RGBA;
 
 		glBindTexture(GL_TEXTURE_2D, textureID);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
 	else {
 		std::cout << "Texture failed to load at path: " << path << std::endl;
