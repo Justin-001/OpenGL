@@ -211,8 +211,6 @@ int main() {
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
 
-		processInput(window);
-
 		lampShader.use();
 
 		lampShader.setVec3("lightColor", glm::vec3(1.0f));
@@ -226,6 +224,8 @@ int main() {
 
 		glBindVertexArray(lightVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		processInput(window);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
