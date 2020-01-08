@@ -40,20 +40,20 @@ void main(){
 	float theta = dot(lightDir, normalize(-light.direction));
 	if (theta > light.cutOff){
 	// ambient lighting
-		vec3 ambient = vec3(texture(material.diffuse, TexCoords)) * light.ambient;
+		vec3 ambient = texture(material.diffuse, TexCoords).rgb * light.ambient;
 
 	// diffuse lighting
 		vec3 norm = normalize(Normal);
 
 
 		float diff = max(dot(norm, lightDir), 0.0); //if angle > 90, not defined
-		vec3 diffuse = vec3(texture(material.diffuse, TexCoords)) * diff * light.diffuse;
+		vec3 diffuse = texture(material.diffuse, TexCoords).rgb * diff * light.diffuse;
 
 	// specular lighting
 		vec3 viewDir = normalize(viewPos - FragPos);
 		vec3 reflectDir = reflect(-lightDir, norm);
 		float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
-		vec3 specular = light.specular * spec * vec3(texture(material.specular, TexCoords));
+		vec3 specular = light.specular * spec * texture(material.specular, TexCoords).rgb;
 
 	// point light attenuation
 		float distance = length(light.position - FragPos);
@@ -65,7 +65,7 @@ void main(){
 		vec3 result = ambient + diffuse + specular;
         FragColor = vec4(result, 1.0);
 		}
-		else FragColor = vec4(light.ambient * vec3(texture(material.diffuse, TexCoords)), 1.0);
+		else FragColor = vec4(light.ambient * texture(material.diffuse, TexCoords).rgb, 1.0);
 
 
 }
