@@ -105,6 +105,19 @@ int main() {
 		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
 	};
 
+	glm::vec3 cubePositions[] = {
+		glm::vec3(0.0f,  0.0f,  0.0f),
+		glm::vec3(2.0f,  5.0f, -15.0f),
+		glm::vec3(-1.5f, -2.2f, -2.5f),
+		glm::vec3(-3.8f, -2.0f, -12.3f),
+		glm::vec3(2.4f, -0.4f, -3.5f),
+		glm::vec3(-1.7f,  3.0f, -7.5f),
+		glm::vec3(1.3f, -2.0f, -2.5f),
+		glm::vec3(1.5f,  2.0f, -2.5f),
+		glm::vec3(1.5f,  0.2f, -1.5f),
+		glm::vec3(-1.3f,  1.0f, -1.5f)
+	};
+
 	unsigned int cubeVAO, VBO;
 	glGenBuffers(1, &VBO);
 	glGenVertexArrays(1, &cubeVAO);
@@ -152,11 +165,10 @@ int main() {
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-//		glm::vec3 lightPos=glm::vec3(1.2f*glm::cos(currentFrame), 1.0f, 2.0f * glm::sin(currentFrame));
-		glm::vec3 lightPos = glm::vec3(1.2f, 1.0f, 2.0f);
+		glm::vec3 lightDirection = glm::vec3(-0.2f, -1.0f, -0.3f);
 
 		lightingShader.use();
-		lightingShader.setFloat("material.shininess", 64.0f);
+		lightingShader.setFloat("material.shininess", 32.0f);
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, diffuseMap);
@@ -164,16 +176,11 @@ int main() {
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, specularMap);
 
-		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, emissionMap);
-
-		glm::vec3 lightColor = glm::vec3(1.0f);
-
 		lightingShader.setVec3("light.ambient", glm::vec3(0.2f));
 		lightingShader.setVec3("light.diffuse", glm::vec3(0.5f));
 		lightingShader.setVec3("light.specular", glm::vec3(1.0f));
 
-		lightingShader.setVec3("light.position", lightPos);
+		lightingShader.setVec3("light.direction", lightDirection);
 		lightingShader.setVec3("viewPos", camera.Position);
 
 		glm::mat4 model = glm::mat4(1.0f);
@@ -188,16 +195,24 @@ int main() {
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		lightingShader.setMat4("projection", projection);
 
+		glBindVertexArray(cubeVAO);
+		for (int i = 0; i < 10; i++) {
+			glm::mat4 model = glm::mat4(1.0f);
+			model = glm::translate(model, cubePositions[i]);
+			float angle = 20.0f * i;
+			model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+			lightingShader.setMat4("model", model);
+
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}
+
 		processInput(window);
 
-		glBindVertexArray(cubeVAO);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+/*		lampShader.use();
 
-		lampShader.use();
+		lampShader.setVec3("lightColor", glm::vec3(1.0f));
 
-		lampShader.setVec3("lightColor", lightColor);
-
-		model = glm::translate(model, lightPos); //move the lamp to another location
+		model = glm::translate(model, glm::vec3(0.2f, 1.0f, 2.0f)); //move the lamp to another location
 		model = glm::scale(model, glm::vec3(0.2f));
 		lampShader.setMat4("model", model);
 
@@ -206,7 +221,7 @@ int main() {
 
 		glBindVertexArray(lightVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-
+*/
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
