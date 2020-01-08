@@ -184,8 +184,12 @@ int main() {
 		lightingShader.setFloat("light.constant", 1.0f);
 		lightingShader.setFloat("light.linear", 0.09f);
 		lightingShader.setFloat("light.quadratic", 0.032f);
+		//flash light
+		lightingShader.setVec3("light.position", camera.Position);
+		lightingShader.setVec3("light.direction", camera.Front);
+		lightingShader.setFloat("light.cutOff", glm::cos(glm::radians(12.5f))); //用余弦值而不用角度值，无需计算反余弦，节省性能开销
 
-		lightingShader.setVec3("light.position", lightPosition);
+
 		lightingShader.setVec3("viewPos", camera.Position);
 
 		glm::mat4 model = glm::mat4(1.0f);
@@ -211,7 +215,7 @@ int main() {
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
 
-		lampShader.use();
+/*		lampShader.use();
 
 		lampShader.setVec3("lightColor", glm::vec3(1.0f));
 
@@ -223,7 +227,7 @@ int main() {
 		lampShader.setMat4("projection", projection); 
 
 		glBindVertexArray(lightVAO);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glDrawArrays(GL_TRIANGLES, 0, 36); */
 
 		processInput(window);
 
