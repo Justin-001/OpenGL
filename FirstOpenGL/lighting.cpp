@@ -147,7 +147,7 @@ int main() {
 		lightingShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 
 		lightingShader.setVec3("lightColor", glm::vec4(1.0f)); */
-		glm::vec3 lightColor;
+		glm::vec3 lightColor;   //disco colorful light
 		lightColor.x = sin(glfwGetTime() * 2.0f);
 		lightColor.y = sin(glfwGetTime() * 0.7f);
 		lightColor.z = sin(glfwGetTime() * 1.3f);
