@@ -127,13 +127,17 @@ int main() {
 	glEnableVertexAttribArray(0);
 
 	lightingShader.use();
-	// diffuse texture
+	// diffuse map
 	lightingShader.setInt("material.diffuse", 0);
 	unsigned int diffuseMap = loadTexture("container2.png");
 
-	// specular texture
+	// specular map
 	lightingShader.setInt("material.specular", 1);
 	unsigned int specularMap = loadTexture("container2_specular.png");
+
+	// emission map
+	lightingShader.setInt("material.emission", 2);
+	unsigned int emissionMap = loadTexture("matrix.jpg");
 
 	while (!glfwWindowShouldClose(window)){
 
@@ -145,7 +149,7 @@ int main() {
 
 		glEnable(GL_DEPTH_TEST);
 
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 //		glm::vec3 lightPos=glm::vec3(1.2f*glm::cos(currentFrame), 1.0f, 2.0f * glm::sin(currentFrame));
@@ -159,6 +163,9 @@ int main() {
 
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, specularMap);
+
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, emissionMap);
 
 		glm::vec3 lightColor = glm::vec3(1.0f);
 
