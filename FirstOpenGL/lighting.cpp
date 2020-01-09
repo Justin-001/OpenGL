@@ -166,7 +166,7 @@ int main() {
 
 		glEnable(GL_DEPTH_TEST);
 
-		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+		glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		lightingShader.use();
@@ -185,9 +185,11 @@ int main() {
 
 		lightingShader.setVec3("viewPos", camera.Position);
 		lightingShader.setFloat("material.shininess", 32.0f);
+		lightingShader.setVec3("pointColor", glm::vec3(0.0f,0.9f,0.25f));
+
 		// directional light
 		lightingShader.setVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);
-		lightingShader.setVec3("dirLight.ambient", glm::vec3(0.05f));
+		lightingShader.setVec3("dirLight.ambient", glm::vec3(0.8f));
 		lightingShader.setVec3("dirLight.diffuse", glm::vec3(0.4f));
 		lightingShader.setVec3("dirLight.specular", glm::vec3(1.0f));
 		// point light 1
@@ -231,8 +233,8 @@ int main() {
 		lightingShader.setFloat("spotLight.constant", 1.0f);
 		lightingShader.setFloat("spotLight.linear", 0.09);
 		lightingShader.setFloat("spotLight.quadratic", 0.032);
-		lightingShader.setFloat("spotLight.cutOff", glm::cos(glm::radians(12.5f)));
-		lightingShader.setFloat("spotLight.outerCutOff", glm::cos(glm::radians(17.5f)));
+		lightingShader.setFloat("spotLight.cutOff", glm::cos(glm::radians(7.0f)));
+		lightingShader.setFloat("spotLight.outerCutOff", glm::cos(glm::radians(10.0f)));
 
 
 		glActiveTexture(GL_TEXTURE0);

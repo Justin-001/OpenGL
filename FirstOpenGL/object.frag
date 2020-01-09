@@ -52,6 +52,7 @@ uniform DirLight dirLight;
 #define NR_POINT_LIGHTS 4
 uniform PointLight pointLights[NR_POINT_LIGHTS];
 uniform SpotLight spotLight;
+uniform vec3 pointColor;
 
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir);
 vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
@@ -67,7 +68,6 @@ void main(){
 		result += CalcPointLight(pointLights[i], norm, FragPos, viewDir);
 	}
 	result += CalcSpotLight(spotLight, norm, FragPos, viewDir);  
-
 	FragColor = vec4(result, 1.0);
 }
 
@@ -103,7 +103,7 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir){
 	ambient *= attenuation;
 	diffuse *= attenuation;
 	specular *= attenuation;
-	return (ambient + diffuse + specular);
+	return (ambient + diffuse + specular) * pointColor;
 }
 
 vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir){
