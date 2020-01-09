@@ -21,6 +21,9 @@
     <ClCompile Include="lighting.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="mesh.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="object.frag">
@@ -35,6 +38,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Includes\camera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

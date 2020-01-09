@@ -195,6 +195,7 @@
   <ItemGroup>
     <ClCompile Include="lighting.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="mesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="object.frag" />
@@ -203,6 +204,7 @@
   <ItemGroup>
     <ClInclude Include="Includes\camera.h" />
     <ClInclude Include="Includes\shader.h" />
+    <ClInclude Include="mesh.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="awesomeface.png" />
