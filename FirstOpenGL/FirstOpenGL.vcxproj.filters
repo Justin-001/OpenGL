@@ -21,15 +21,15 @@
     <ClCompile Include="lighting.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="mesh.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="object.frag">
       <Filter>资源文件</Filter>
     </Text>
     <Text Include="object.vert">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="object1.frag">
       <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>
@@ -40,7 +40,13 @@
     <ClInclude Include="Includes\camera.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mesh.h">
+    <ClInclude Include="Includes\mesh.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\model.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\stb_image.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

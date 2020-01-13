@@ -123,7 +123,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc142-mtd.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='OpenGL|Win32'">
@@ -195,16 +195,18 @@
   <ItemGroup>
     <ClCompile Include="lighting.cpp" />
     <ClCompile Include="glad.c" />
-    <ClCompile Include="mesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="object.frag" />
     <Text Include="object.vert" />
+    <Text Include="object1.frag" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Includes\camera.h" />
+    <ClInclude Include="Includes\mesh.h" />
+    <ClInclude Include="Includes\model.h" />
     <ClInclude Include="Includes\shader.h" />
-    <ClInclude Include="mesh.h" />
+    <ClInclude Include="Includes\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="awesomeface.png" />
