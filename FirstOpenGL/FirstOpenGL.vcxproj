@@ -199,7 +199,6 @@
   <ItemGroup>
     <Text Include="object.frag" />
     <Text Include="object.vert" />
-    <Text Include="object1.frag" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Includes\camera.h" />

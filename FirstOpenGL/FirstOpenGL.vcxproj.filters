@@ -29,9 +29,6 @@
     <Text Include="object.vert">
       <Filter>资源文件</Filter>
     </Text>
-    <Text Include="object1.frag">
-      <Filter>资源文件</Filter>
-    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Includes\shader.h">
