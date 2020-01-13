@@ -162,8 +162,8 @@ int main() {
 		
 		// directional light
 		lightingShader.setVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);
-		lightingShader.setVec3("dirLight.ambient", glm::vec3(0.4f));
-		lightingShader.setVec3("dirLight.diffuse", glm::vec3(0.5f));
+		lightingShader.setVec3("dirLight.ambient", glm::vec3(0.2f));
+		lightingShader.setVec3("dirLight.diffuse", glm::vec3(0.4f));
 		lightingShader.setVec3("dirLight.specular", glm::vec3(1.0f));
 		// point light 1
 		lightingShader.setVec3("pointLights[0].position", glm::vec3(glm::sin(currentFrame)* pointLightPositions[0].x, pointLightPositions[0].y, glm::cos(currentFrame)* pointLightPositions[0].z));
@@ -174,7 +174,7 @@ int main() {
 		lightingShader.setFloat("pointLights[0].linear", 0.09);
 		lightingShader.setFloat("pointLights[0].quadratic", 0.032);
 		// point light 2
-		lightingShader.setVec3("pointLights[1].position", pointLightPositions[1]);
+		lightingShader.setVec3("pointLights[1].position", glm::vec3(glm::sin(currentFrame)* pointLightPositions[1].x, pointLightPositions[1].y, glm::cos(currentFrame)* pointLightPositions[1].z));
 		lightingShader.setVec3("pointLights[1].ambient", glm::vec3(0.5f));
 		lightingShader.setVec3("pointLights[1].diffuse", glm::vec3(0.8f));
 		lightingShader.setVec3("pointLights[1].specular", glm::vec3(2.0f));
